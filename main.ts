@@ -82,11 +82,12 @@ basic.forever(function () {
             forward(1023)
         } else if (pins.digitalReadPin(DigitalPin.P8) == 0 && pins.digitalReadPin(DigitalPin.P9) == 1) {
             GiroIzq(1023)
+        } else if (pins.digitalReadPin(DigitalPin.P8) == 1 && pins.digitalReadPin(DigitalPin.P9) == 0) {
+            GiroDer(1023)
         } else {
             while (pins.digitalReadPin(DigitalPin.P8) == 1) {
                 GiroDer(1023)
             }
         }
-        basic.pause(200)
     }
 })
