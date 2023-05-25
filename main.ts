@@ -65,6 +65,9 @@ function GiroDer (Velocidad: number) {
     pins.digitalWritePin(DigitalPin.P15, 0)
     pins.digitalWritePin(DigitalPin.P16, 1)
 }
+input.onButtonPressed(Button.B, function () {
+    Apulsada = 0
+})
 function forward (Velocidad: number) {
     pins.analogWritePin(AnalogPin.P1, Velocidad)
     pins.digitalWritePin(DigitalPin.P13, 1)
@@ -73,21 +76,18 @@ function forward (Velocidad: number) {
     pins.digitalWritePin(DigitalPin.P15, 1)
     pins.digitalWritePin(DigitalPin.P16, 0)
 }
+let Apulsada = 0
 led.enable(false)
 pins.digitalWritePin(DigitalPin.P14, 1)
-let Apulsada = 0
+Apulsada = 0
 basic.forever(function () {
     if (Apulsada > 0) {
         if (pins.digitalReadPin(DigitalPin.P8) == 0 && pins.digitalReadPin(DigitalPin.P9) == 0) {
-            forward(1023)
+            forward(500)
         } else if (pins.digitalReadPin(DigitalPin.P8) == 0 && pins.digitalReadPin(DigitalPin.P9) == 1) {
-            GiroIzq(1023)
-        } else if (pins.digitalReadPin(DigitalPin.P8) == 1 && pins.digitalReadPin(DigitalPin.P9) == 0) {
-            GiroDer(1023)
+            GiroIzq(300)
         } else {
-            while (pins.digitalReadPin(DigitalPin.P8) == 1) {
-                GiroDer(1023)
-            }
+            GiroDer(300)
         }
     }
 })
